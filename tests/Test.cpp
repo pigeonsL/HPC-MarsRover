@@ -3,58 +3,57 @@
 
 using namespace mars::rover;
 
-TEST(Report, default_start_and_diretion_is_N)
+TEST(Report_controller, should_report_position_with_set_point_and_direction_N)
 {
     Controller controller(0, 0, Controller::Direction::North);
     auto actual = controller.Report();
     EXPECT_EQ(actual, "0 0 N");
 }
-TEST(Report, default_start_and_diretion_is_S)
+TEST(Report_controller, should_report_position_with_set_point_and_direction_S)
 {
     Controller controller(0, 0, Controller::Direction::South);
     auto actual = controller.Report();
     EXPECT_EQ(actual, "0 0 S");
 }
-TEST(Report, default_start_and_diretion_is_W)
+TEST(Report_controller, should_report_position_with_set_point_and_direction_W)
 {
     Controller controller(0, 0, Controller::Direction::West);
     auto actual = controller.Report();
     EXPECT_EQ(actual, "0 0 W");
 }
-TEST(Report, default_start_and_diretion_is_E)
+TEST(Report_controller, should_report_position_with_set_point_and_direction_E)
 {
     Controller controller(0, 0, Controller::Direction::East);
     auto actual = controller.Report();
     EXPECT_EQ(actual, "0 0 E");
 }
-TEST(Execute, default_start_and_diretion_is_E_add_command)
+
+TEST(Execute, should_forward_with_set_command_Forward_and_direction_E)
 {
     Controller controller(0, 0, Controller::Direction::East);
-    std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
-                                             {Controller::Command::Forward},{Controller::Command::TurnRight}};
+    std::vector<Controller::Command> command{{Controller::Command::Forward}};
     controller.Execute(command);
     auto actual = controller.Report();
-    EXPECT_EQ(actual, "1 1 E");
+    EXPECT_EQ(actual, "1 0 E");
 }
-TEST(Execute, default_start_and_diretion_is_S_add_command)
+
+TEST(Execute, should_turnleft_with_set_command_TurnLeft)
 {
     Controller controller(0, 0, Controller::Direction::South);
-    std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
-                                             {Controller::Command::Forward},{Controller::Command::TurnRight}};
+    std::vector<Controller::Command> command{{Controller::Command::TurnLeft}};
     controller.Execute(command);
     auto actual = controller.Report();
-    EXPECT_EQ(actual, "1 -1 S");
+    EXPECT_EQ(actual, "0 0 E");
 }
-TEST(Execute, default_start_and_diretion_is_W_add_command)
+TEST(Execute, should_turnright_with_set_command_TurnRight)
 {
     Controller controller(0, 0, Controller::Direction::West);
-    std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
-                                             {Controller::Command::Forward},{Controller::Command::TurnRight}};
+    std::vector<Controller::Command> command{{Controller::Command::TurnRight}};
     controller.Execute(command);
     auto actual = controller.Report();
-    EXPECT_EQ(actual, "-1 -1 W");
+    EXPECT_EQ(actual, "0 0 N");
 }
-TEST(Execute, default_start_and_diretion_is_N_add_command)
+TEST(Execute, should_change_position_with_all_command)
 {
     Controller controller(0, 0, Controller::Direction::North);
     std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
@@ -63,7 +62,7 @@ TEST(Execute, default_start_and_diretion_is_N_add_command)
     auto actual = controller.Report();
     EXPECT_EQ(actual, "-1 1 N");
 }
-TEST(Execute, random_start_and_direction_N)
+TEST(Execute, should_change_position_with_set_startPoint_and_all_command)
 {
     Controller controller(1, 1, Controller::Direction::North);
     std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
@@ -72,16 +71,7 @@ TEST(Execute, random_start_and_direction_N)
     auto actual = controller.Report();
     EXPECT_EQ(actual, "0 2 N");
 }
-TEST(Execute, random_start_and_direction_W)
-{
-    Controller controller(-1, 1, Controller::Direction::West);
-    std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
-                                             {Controller::Command::Forward},{Controller::Command::TurnRight}};
-    controller.Execute(command);
-    auto actual = controller.Report();
-    EXPECT_EQ(actual, "-2 0 W");
-}
-TEST(Execute, random_start_and_direction_S)
+TEST(Execute, should_change_position_with_set_startPoint_and_more_command)
 {
     Controller controller(-2, 1, Controller::Direction::South);
     std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
