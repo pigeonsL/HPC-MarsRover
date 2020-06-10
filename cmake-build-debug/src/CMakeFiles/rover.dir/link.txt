@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc librover.a  CMakeFiles/rover.dir/RoverController.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib librover.a

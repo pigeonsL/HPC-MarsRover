@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/MarsRover.h
+string
+-
+vector
+-
+map
+-
+
+/Users/dove/HPC/MarsRover/src/RoverController.cpp
+MarsRover.h
+/Users/dove/HPC/MarsRover/src/MarsRover.h
+
