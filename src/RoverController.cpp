@@ -13,39 +13,20 @@ Controller::Controller(int x, int y, Direction direction)
 
 void Controller::Execute(const std::vector<Command>& commands)
 {
+    int i = (int)direction;
     for(auto it = commands.begin(); it != commands.end(); it++){
 
-//        int i = (int)direction;
         if(*it == Controller::Command::Forward){
-            if(direction == Controller::Direction::East){
-                x += changeDirection[0][0];
-                y += changeDirection[0][1];
-                continue;
-            }
-            if(direction == Controller::Direction::South){
-                x += changeDirection[1][0];
-                y += changeDirection[1][1];
-                continue;
-            }
-            if(direction == Controller::Direction::West){
-                x += changeDirection[2][0];
-                y += changeDirection[2][1];
-                continue;
-            }
-            if(direction == Controller::Direction::North){
-                x += changeDirection[3][0];
-                y += changeDirection[3][1];
-                continue;
-            }
+            x += changeDirection[i][0];
+            y += changeDirection[i][1];
         }
         if(*it == Controller::Command::TurnRight){
-
+            i = (i+1)%4;
         }
-
+        if(*it == Controller::Command::TurnLeft){
+            i = (i+3)%4;
+        }
     }
-
-
-
 }
 
 std::string Controller::Report() const

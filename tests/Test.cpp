@@ -63,3 +63,21 @@ TEST(Execute, Report_N)
     auto actual = controller.Report();
     EXPECT_EQ(actual, "-1 1 N");
 }
+TEST(Execute, Report_N_1)
+{
+    Controller controller(1, 1, Controller::Direction::North);
+    std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
+                                             {Controller::Command::Forward},{Controller::Command::TurnRight}};
+    controller.Execute(command);
+    auto actual = controller.Report();
+    EXPECT_EQ(actual, "0 2 N");
+}
+TEST(Execute, random_start_and_direction)
+{
+    Controller controller(-1, 1, Controller::Direction::West);
+    std::vector<Controller::Command> command{{Controller::Command::Forward},{Controller::Command::TurnLeft},
+                                             {Controller::Command::Forward},{Controller::Command::TurnRight}};
+    controller.Execute(command);
+    auto actual = controller.Report();
+    EXPECT_EQ(actual, "-2 0 W");
+}

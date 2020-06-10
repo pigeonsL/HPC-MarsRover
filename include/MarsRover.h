@@ -31,8 +31,8 @@ public:
     std::string Report() const;
     int x;
     int y;
-    Direction direction;
-    int changeDirection[4][2] = {{1,0},{0,-1},{-1,0},{0,1}};
+    Direction direction;//The current direction of MarsRover
+    int changeDirection[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};//N E S W
 
     std::map<Direction, std::string> reportDirection{
             {(Direction::North), "N"},
