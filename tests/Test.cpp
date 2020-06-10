@@ -28,6 +28,7 @@ TEST(Report_controller, should_report_position_with_set_point_and_direction_E)
     EXPECT_EQ(actual, "0 0 E");
 }
 
+
 TEST(Execute, should_forward_with_set_command_Forward_and_direction_E)
 {
     Controller controller(0, 0, Controller::Direction::East);
@@ -36,6 +37,31 @@ TEST(Execute, should_forward_with_set_command_Forward_and_direction_E)
     auto actual = controller.Report();
     EXPECT_EQ(actual, "1 0 E");
 }
+TEST(Execute, should_forward_with_set_command_Forward_and_direction_W)
+{
+    Controller controller(0, 0, Controller::Direction::West);
+    std::vector<Controller::Command> command{{Controller::Command::Forward}};
+    controller.Execute(command);
+    auto actual = controller.Report();
+    EXPECT_EQ(actual, "-1 0 W");
+}
+TEST(Execute, should_forward_with_set_command_Forward_and_direction_S)
+{
+    Controller controller(0, 0, Controller::Direction::South);
+    std::vector<Controller::Command> command{{Controller::Command::Forward}};
+    controller.Execute(command);
+    auto actual = controller.Report();
+    EXPECT_EQ(actual, "0 -1 S");
+}
+TEST(Execute, should_forward_with_set_command_Forward_and_direction_N)
+{
+    Controller controller(0, 0, Controller::Direction::North);
+    std::vector<Controller::Command> command{{Controller::Command::Forward}};
+    controller.Execute(command);
+    auto actual = controller.Report();
+    EXPECT_EQ(actual, "0 1 N");
+}
+
 
 TEST(Execute, should_turnleft_with_set_command_TurnLeft)
 {
