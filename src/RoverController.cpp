@@ -19,14 +19,18 @@ void Controller::Execute(const std::vector<Command>& commands)
         if(*it == Controller::Command::Forward){
             x += changeDirection[i][0];
             y += changeDirection[i][1];
+            continue;
         }
         if(*it == Controller::Command::TurnRight){
             i = (i+1)%4;
+            continue;
         }
         if(*it == Controller::Command::TurnLeft){
             i = (i+3)%4;
+            continue;
         }
     }
+    direction = (Controller::Direction)i;
 }
 
 std::string Controller::Report() const
